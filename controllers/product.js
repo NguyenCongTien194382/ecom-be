@@ -27,7 +27,7 @@ export const uploadImageProduct = (req, res) => {
 export const createProduct = async (req, res) => {
     try {
         const { name, category, description, urlImage, sizeInfo } = req.body
-        const id = 'NCT' + Date.now()
+        const id = 'NTN' + Date.now()
 
         const product = await Product.create({
             id,
@@ -65,8 +65,19 @@ export const editProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     try {
         const id = req.params.id
+        console.log(id)
         await Product.findOneAndDelete({ id })
         return success(res, 'Xoá sản phẩm thành công')
+    } catch (error) {
+        console.error(error)
+        return setError(res, "Đã có lỗi xảy ra", 400);
+    }
+}
+
+export const getListProduct = async (req, res) => {
+    try {
+        const products = await Product.find().sort({ createdAt: -1 })
+        return success(res, 'Lấy danh sách sản phẩm thành công', { products })
     } catch (error) {
         console.error(error)
         return setError(res, "Đã có lỗi xảy ra", 400);

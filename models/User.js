@@ -41,7 +41,7 @@ const UsersSchema = new mongoose.Schema(
         rank: {
             type: String,
             enum: ['Hạng Bạc', 'Hạng Vàng', 'Hạng Bạch Kim', 'Hạng Kim Cương'],
-            default: 'member'
+            default: 'Hạng Bạc'
         },
         address: {
             type: String,
